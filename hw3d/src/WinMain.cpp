@@ -1,7 +1,12 @@
 #include <Windows.h>
 
+#include "WindowsMessageMap.h"
+
 LRESULT CALLBACK MyWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    static WindowsMessageMap mm{};
+    OutputDebugString(mm(uMsg, lParam, wParam).c_str());
+
     switch (uMsg)
     {
         case WM_CLOSE:
@@ -21,7 +26,7 @@ int WINAPI WinMain(
     PSTR cmdline,
     int cmdshow)
 {
-    const auto clsName = L"HW3D";
+    const auto clsName = "HW3D";
     WNDCLASSEX wc{ 0 };
     wc.cbSize = sizeof(WNDCLASSEX);
     wc.style = CS_OWNDC;
@@ -43,7 +48,7 @@ int WINAPI WinMain(
     }
 
     auto hwnd = CreateWindowEx(
-        0, clsName, L"My Window",
+        0, clsName, "My Window",
         WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
         nullptr, nullptr, hInst, nullptr);
