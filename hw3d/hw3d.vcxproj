@@ -111,6 +111,7 @@
       </EntryPointSymbol>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -138,6 +139,7 @@
       </EntryPointSymbol>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -161,6 +163,7 @@
       </EntryPointSymbol>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -188,6 +191,7 @@
       </EntryPointSymbol>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
