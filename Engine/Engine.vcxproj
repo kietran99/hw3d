@@ -171,11 +171,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core\include\ChiliWin.h" />
+    <ClInclude Include="Core\include\RR_Win.h" />
+    <ClInclude Include="Core\include\RR_Exception.h" />
     <ClInclude Include="Core\include\Window.h" />
     <ClInclude Include="Core\include\WindowsMessageMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\src\RR_ExceptionImpl.cpp" />
     <ClCompile Include="Core\src\WindowImpl.cpp" />
     <ClCompile Include="Core\src\WindowsMessageMapImpl.cpp" />
   </ItemGroup>

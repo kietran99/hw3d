@@ -1,4 +1,5 @@
 #include <Windows.h>
+
 #include "Window.h"
 
 int WINAPI WinMain(
@@ -7,23 +8,40 @@ int WINAPI WinMain(
     PSTR cmdline,
     int cmdshow)
 {
-    Window wnd{ 640, 480, "My Window" };
-
-    MSG msg{};
-    BOOL res;
-
-    do
+    try
     {
-        res = GetMessage(&msg, nullptr, 0, 0);
+        RR::Window wnd{ 1280, 960, "My Window" };
 
-        if (res <= 0)
+        MSG msg{};
+        BOOL res;
+
+        do
         {
-            break;
-        }
+            res = GetMessage(&msg, nullptr, 0, 0);
 
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    } while (true);
+            if (res <= 0)
+            {
+                break;
+            }
 
-    return res == -1 ? -1 : (int) msg.wParam;
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        } while (true);
+
+        return res == -1 ? -1 : (int) msg.wParam;
+    }
+    catch (const RR::Window::Exception& e)
+    {
+        MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION); 
+    }
+    catch (const std::exception& e)
+    {
+        MessageBox(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
+    catch (...)
+    {
+        MessageBox(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
+
+    return -1;
 }
