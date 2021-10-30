@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RR_Win.h"
-
 #include "RR_Exception.h"
 
 namespace RR
@@ -20,7 +19,7 @@ namespace RR
 		private:
 			HRESULT m_hRes;
 		};
-	//private:
+	private:
 		class WindowClass
 		{
 		public:
@@ -38,7 +37,7 @@ namespace RR
 		};
 
 	public:
-		Window(int width, int height, const char* name) noexcept;
+		Window(int width, int height, const char* name);
 		~Window();
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;

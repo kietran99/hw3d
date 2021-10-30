@@ -171,15 +171,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\include\Input.h" />
     <ClInclude Include="Core\include\RR_Win.h" />
     <ClInclude Include="Core\include\RR_Exception.h" />
     <ClInclude Include="Core\include\Window.h" />
     <ClInclude Include="Core\include\WindowsMessageMap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\src\RR_ExceptionImpl.cpp" />
-    <ClCompile Include="Core\src\WindowImpl.cpp" />
-    <ClCompile Include="Core\src\WindowsMessageMapImpl.cpp" />
+    <ClCompile Include="Core\src\Input.cpp" />
+    <ClCompile Include="Core\src\RR_Exception.cpp" />
+    <ClCompile Include="Core\src\Window.cpp" />
+    <ClCompile Include="Core\src\WindowsMessageMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

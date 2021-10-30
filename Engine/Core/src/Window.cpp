@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+#include "Input.h"
+
 #include "WindowsMessageMap.h"
 
 namespace RR
@@ -42,7 +44,7 @@ namespace RR
         return m_instance.m_hInst;
     }
 
-    Window::Window(int width, int height, const char* name) noexcept
+    Window::Window(int width, int height, const char* name)
     {
         RECT wRect{};
         wRect.left = 100;
@@ -102,11 +104,32 @@ namespace RR
     {
         static WindowsMessageMap mm{};
         OutputDebugString(mm(uMsg, lParam, wParam).c_str());
+        Input::s_instance->Reset();
 
         switch (uMsg)
         {
         case WM_DESTROY:
             PostQuitMessage(0);
+            return 0;
+        case WM_KILLFOCUS:
+            Input::s_instance->Reset();
+            return 0;
+        case WM_KEYDOWN:
+        case WM_SYSKEYDOWN:
+            if (lParam & 0x40000000)
+            {
+                Input::s_instance->OnKeyHold(wParam);
+            }
+            else
+            {
+                Input::s_instance->OnKeyPressed(wParam);
+            }
+            return 0;
+        case WM_KEYUP:
+        case WM_SYSKEYUP:
+            Input::s_instance->OnKeyReleased(wParam);
+            return 0;
+        case WM_CHAR:
             return 0;
         }
 

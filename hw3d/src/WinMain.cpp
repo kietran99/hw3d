@@ -1,6 +1,9 @@
 #include <Windows.h>
 
 #include "Window.h"
+#include "Input.h"
+
+using namespace RR;
 
 int WINAPI WinMain(
     HINSTANCE hInst,
@@ -10,7 +13,7 @@ int WINAPI WinMain(
 {
     try
     {
-        RR::Window wnd{ 1280, 960, "My Window" };
+        RR::Window wnd{ 800, 450, "My Window" };
 
         MSG msg{};
         BOOL res;
@@ -26,6 +29,7 @@ int WINAPI WinMain(
 
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+
         } while (true);
 
         return res == -1 ? -1 : (int) msg.wParam;
