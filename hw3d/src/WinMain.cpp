@@ -1,5 +1,3 @@
-#include <Windows.h>
-
 #include "Window.h"
 #include "Input.h"
 

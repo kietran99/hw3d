@@ -4,6 +4,7 @@
 
 #include "Input.h"
 
+#include "Debug.h"
 #include "WindowsMessageMap.h"
 
 namespace RR
@@ -103,7 +104,8 @@ namespace RR
     LRESULT Window::HandleMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         static WindowsMessageMap mm{};
-        OutputDebugString(mm(uMsg, lParam, wParam).c_str());
+        Debug::Log(mm(uMsg, lParam, wParam).c_str());
+
         Input::s_instance->Reset();
 
         switch (uMsg)

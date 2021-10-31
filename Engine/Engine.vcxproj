@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\include\Debug.h" />
     <ClInclude Include="Core\include\Input.h" />
     <ClInclude Include="Core\include\RR_Win.h" />
     <ClInclude Include="Core\include\RR_Exception.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Core\include\WindowsMessageMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\src\Debug.cpp" />
     <ClCompile Include="Core\src\Input.cpp" />
     <ClCompile Include="Core\src\RR_Exception.cpp" />
     <ClCompile Include="Core\src\Window.cpp" />
