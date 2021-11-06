@@ -104,7 +104,7 @@ namespace RR
     LRESULT Window::HandleMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         static WindowsMessageMap mm{};
-        Debug::Log(mm(uMsg, lParam, wParam).c_str());
+        //Debug::Log(mm(uMsg, lParam, wParam).c_str());
 
         Input::s_instance->Reset();
 
@@ -132,6 +132,10 @@ namespace RR
             Input::s_instance->OnKeyReleased(wParam);
             return 0;
         case WM_CHAR:
+            return 0;
+        case WM_MOUSEMOVE:
+            const auto mousePos = MAKEPOINTS(lParam);
+            Input::s_instance->OnMouseMove(mousePos.x, mousePos.y);
             return 0;
         }
 

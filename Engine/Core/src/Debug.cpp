@@ -18,7 +18,13 @@ RR::Debug::Debug()
     freopen_s(&pDummy, "CONOUT$", "w", stdout);
 }
 
-void RR::Debug::Log(const char* msg)
-{
-    printf("%s", msg);
+void RR::Debug::Log(const char* fmt, ...)
+{ 
+    va_list args;
+    va_start(args, fmt);
+    vprintf(fmt, args);
+    va_end(args);
+    printf("\n");
 }
+
+

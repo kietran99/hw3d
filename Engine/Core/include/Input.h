@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 namespace RR
 {
 	enum class KeyCode
@@ -42,11 +44,15 @@ namespace RR
 		static bool GetKeyUp(KeyCode keyCode) noexcept;
 		static bool GetKey(KeyCode keyCode) noexcept;
 
+		static std::pair<int, int> GetMousePosition() noexcept;
+
 	private:
 		void OnKeyPressed(unsigned __int64 keyCode) noexcept;
 		void OnKeyReleased(unsigned __int64 keyCode) noexcept;
 		void OnKeyHold(unsigned __int64 keyCode) noexcept;
 		void Reset() noexcept;
+
+		void OnMouseMove(int x, int y) noexcept;
 
 	private:
 		static Input* s_instance;
@@ -54,5 +60,7 @@ namespace RR
 		KeyCode m_keyCode;
 		ButtonState m_btnState;
 		bool m_isBtnHold;
+
+		int m_mouseX, m_mouseY;
 	};
 }

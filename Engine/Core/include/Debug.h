@@ -7,7 +7,7 @@ namespace RR
 		friend class Window;
 
 	public:
-		static void Log(const char* msg);
+		static void Log(const char* fmt, ...);
 
 	private:
 		Debug();
