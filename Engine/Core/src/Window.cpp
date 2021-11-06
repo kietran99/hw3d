@@ -104,7 +104,7 @@ namespace RR
     LRESULT Window::HandleMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         static WindowsMessageMap mm{};
-        //Debug::Log(mm(uMsg, lParam, wParam).c_str());
+        Debug::Log(mm(uMsg, lParam, wParam).c_str());
 
         Input::s_instance->Reset();
 
@@ -136,6 +136,24 @@ namespace RR
         case WM_MOUSEMOVE:
             const auto mousePos = MAKEPOINTS(lParam);
             Input::s_instance->OnMouseMove(mousePos.x, mousePos.y);
+            return 0;
+        case WM_LBUTTONDOWN:
+            Input::s_instance->OnMouseButtonDown(0);
+            return 0;
+        case WM_RBUTTONDOWN:
+            Input::s_instance->OnMouseButtonDown(1);
+            return 0;
+        case WM_MBUTTONDOWN:
+            Input::s_instance->OnMouseButtonDown(2);
+            return 0;
+        case WM_LBUTTONUP:
+            Input::s_instance->OnMouseButtonUp(0);
+            return 0;
+        case WM_RBUTTONUP:
+            Input::s_instance->OnMouseButtonUp(1);
+            return 0;
+        case WM_MBUTTONUP:
+            Input::s_instance->OnMouseButtonUp(2);
             return 0;
         }
 

@@ -45,22 +45,29 @@ namespace RR
 		static bool GetKey(KeyCode keyCode) noexcept;
 
 		static std::pair<int, int> GetMousePosition() noexcept;
+		static bool GetMouseButtonDown(int button) noexcept;
+		static bool GetMouseButtonUp(int button) noexcept;
 
 	private:
 		void OnKeyPressed(unsigned __int64 keyCode) noexcept;
 		void OnKeyReleased(unsigned __int64 keyCode) noexcept;
 		void OnKeyHold(unsigned __int64 keyCode) noexcept;
-		void Reset() noexcept;
-
+		
 		void OnMouseMove(int x, int y) noexcept;
+		void OnMouseButtonDown(int button) noexcept;
+		void OnMouseButtonUp(int button) noexcept;
+
+		void Reset() noexcept;
 
 	private:
 		static Input* s_instance;
 
 		KeyCode m_keyCode;
-		ButtonState m_btnState;
+		ButtonState m_keyBtnState;
 		bool m_isBtnHold;
 
 		int m_mouseX, m_mouseY;
+		int m_mouseBtn;
+		ButtonState m_mouseBtnState;
 	};
 }
