@@ -27,4 +27,7 @@ void RR::Debug::Log(const char* fmt, ...)
     printf("\n");
 }
 
-
+void RR::Debug::Free()
+{
+    PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);
+}

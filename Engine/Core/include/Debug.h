@@ -9,6 +9,8 @@ namespace RR
 	public:
 		static void Log(const char* fmt, ...);
 
+		static void Free();
+
 	private:
 		Debug();
 

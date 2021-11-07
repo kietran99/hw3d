@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include "Window.h"
+#include "Debug.h"
 
 RR::Application::Application()
 	: m_window(new Window(800, 450, "My Window"))
@@ -9,31 +10,24 @@ RR::Application::Application()
 RR::Application::~Application()
 {
     delete m_window;
+    Debug::Free();
 }
 
 int RR::Application::Start()
 {
     try
     {
-        MSG msg{};
-        BOOL res;
-
-        do
+        while (true)
         {
-            res = GetMessage(&msg, nullptr, 0, 0);
+            const auto exitCode = Window::ProcessMessagePump();
 
-            if (res <= 0)
+            if (exitCode)
             {
-                break;
+                return *exitCode;
             }
 
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
             Update();
-
-        } while (true);
-
-        return res == -1 ? -1 : (int)msg.wParam;
+        }
     }
     catch (const RR::Window::Exception& e)
     {

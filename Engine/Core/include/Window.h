@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 #include "RR_Win.h"
 #include "RR_Exception.h"
 
@@ -41,9 +43,13 @@ namespace RR
 		~Window();
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
+		static std::optional<int> ProcessMessagePump();
+
+	private:
 		static LRESULT WINAPI HandleMessageSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		static LRESULT WINAPI HandleMessageThunk(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		LRESULT HandleMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 	private:
 		int m_width, m_height;
 		HWND m_hWnd;

@@ -11,6 +11,7 @@ namespace RR
 	public:
 		Application();
 		~Application();
+
 		int Start();
 
 	private:

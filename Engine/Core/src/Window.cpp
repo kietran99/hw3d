@@ -81,6 +81,24 @@ namespace RR
         DestroyWindow(m_hWnd);
     }
 
+    std::optional<int> Window::ProcessMessagePump()
+    {
+        MSG msg{};
+
+        while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        {
+            if (msg.message == WM_DESTROY)
+            {
+                return msg.wParam;
+            }
+
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+
+        return std::nullopt;
+    }
+
     LRESULT WINAPI Window::HandleMessageSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         if (uMsg != WM_NCCREATE)
@@ -111,6 +129,7 @@ namespace RR
         switch (uMsg)
         {
         case WM_DESTROY:
+            Debug::Free();
             PostQuitMessage(0);
             return 0;
         case WM_KILLFOCUS:
@@ -178,7 +197,7 @@ namespace RR
 
     const char* Window::Exception::GetType() const noexcept
     {
-        return "RR Window Error";
+        return "RR Window Exception";
     }
 
     std::string Window::Exception::TranslateErrorCode(HRESULT hRes) noexcept
