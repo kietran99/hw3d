@@ -9,5 +9,5 @@ int WINAPI WinMain(
     int cmdshow)
 {
     Application app{};
-    return app.Start();
+    return (int)app.Start();
 }

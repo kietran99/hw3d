@@ -1,12 +1,15 @@
 #pragma once
 
 #include <optional>
+#include <memory>
 
 #include "RR_Win.h"
 #include "RR_Exception.h"
 
 namespace RR
 {
+	class Renderer;
+
 	class Window
 	{
 	public:
@@ -43,7 +46,9 @@ namespace RR
 		~Window();
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
-		static std::optional<int> ProcessMessagePump();
+		static std::optional<WPARAM> ProcessMessagePump();
+
+		void UpdateGraphics();
 
 	private:
 		static LRESULT WINAPI HandleMessageSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -53,6 +58,8 @@ namespace RR
 	private:
 		int m_width, m_height;
 		HWND m_hWnd;
+	public:
+		std::unique_ptr<Renderer> m_pRenderer;
 	};
 
 #define RR_WND_EXCEPT(hRes) RR::Window::Exception(__LINE__, __FILE__, hRes)

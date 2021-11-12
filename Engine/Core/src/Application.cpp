@@ -4,16 +4,16 @@
 #include "Debug.h"
 
 RR::Application::Application()
-	: m_window(new Window(800, 450, "My Window"))
+	: m_pWindow(new Window(800, 450, "My Window"))
 {}
 
 RR::Application::~Application()
 {
-    delete m_window;
+    delete m_pWindow;
     Debug::Free();
 }
 
-int RR::Application::Start()
+WPARAM RR::Application::Start()
 {
     try
     {
@@ -47,4 +47,5 @@ int RR::Application::Start()
 
 void RR::Application::Update()
 {
+    m_pWindow->UpdateGraphics();
 }

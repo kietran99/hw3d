@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "Input.h"
+#include "Renderer.h"
 
 #include "Debug.h"
 #include "WindowsMessageMap.h"
@@ -46,6 +47,7 @@ namespace RR
     }
 
     Window::Window(int width, int height, const char* name)
+        : m_pRenderer(nullptr)
     {
         RECT wRect{};
         wRect.left = 100;
@@ -74,6 +76,7 @@ namespace RR
         }
 
         ShowWindow(m_hWnd, SW_SHOW);
+        m_pRenderer = std::make_unique<Renderer>(m_hWnd);
     }
 
     Window::~Window()
@@ -81,7 +84,7 @@ namespace RR
         DestroyWindow(m_hWnd);
     }
 
-    std::optional<int> Window::ProcessMessagePump()
+    std::optional<WPARAM> Window::ProcessMessagePump()
     {
         MSG msg{};
 
@@ -97,6 +100,11 @@ namespace RR
         }
 
         return std::nullopt;
+    }
+
+    void Window::UpdateGraphics()
+    {
+        m_pRenderer->Update();
     }
 
     LRESULT WINAPI Window::HandleMessageSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

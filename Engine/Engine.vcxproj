@@ -107,6 +107,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>d3d11.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,6 +150,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>d3d11.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -173,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="Core\include\Application.h" />
     <ClInclude Include="Core\include\Debug.h" />
+    <ClInclude Include="Core\include\Renderer.h" />
     <ClInclude Include="Core\include\Input.h" />
     <ClInclude Include="Core\include\RR_Win.h" />
     <ClInclude Include="Core\include\RR_Exception.h" />
@@ -182,6 +189,7 @@
   <ItemGroup>
     <ClCompile Include="Core\src\Application.cpp" />
     <ClCompile Include="Core\src\Debug.cpp" />
+    <ClCompile Include="Core\src\Renderer.cpp" />
     <ClCompile Include="Core\src\Input.cpp" />
     <ClCompile Include="Core\src\RR_Exception.cpp" />
     <ClCompile Include="Core\src\Window.cpp" />

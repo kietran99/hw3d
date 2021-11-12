@@ -12,12 +12,12 @@ namespace RR
 		Application();
 		~Application();
 
-		int Start();
+		WPARAM Start();
 
 	private:
 		void Update();
 
 	private:
-		Window* m_window;
+		Window* m_pWindow;
 	};
 }
