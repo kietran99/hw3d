@@ -4,6 +4,7 @@
 
 #include "Input.h"
 #include "Renderer.h"
+#include "Error.h"
 
 #include "Debug.h"
 #include "WindowsMessageMap.h"
@@ -55,11 +56,8 @@ namespace RR
         wRect.top = 100;
         wRect.bottom = height + wRect.top;
         const auto adjustWndRectRes = AdjustWindowRect(&wRect, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
-        
-        if (adjustWndRectRes == 0)
-        {
-            throw RR_WND_LAST_EXCEPT();
-        }
+
+        CHECK_WND(adjustWndRectRes != 0);
 
         m_width = wRect.right - wRect.left;
         m_height = wRect.bottom - wRect.top;
@@ -70,10 +68,7 @@ namespace RR
             CW_USEDEFAULT, CW_USEDEFAULT, m_width, m_height,
             nullptr, nullptr, WindowClass::GetInstance(), this);
 
-        if (!m_hWnd)
-        {
-            throw RR_WND_LAST_EXCEPT();
-        }
+        CHECK_WND(m_hWnd);
 
         ShowWindow(m_hWnd, SW_SHOW);
         m_pRenderer = std::make_unique<Renderer>(m_hWnd);

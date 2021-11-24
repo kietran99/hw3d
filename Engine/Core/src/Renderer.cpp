@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
 #include "Window.h"
+#include "Error.h"
 
 RR::Renderer::Renderer(HWND hWnd)
 	: m_pSwapChain(nullptr)
@@ -24,11 +25,17 @@ RR::Renderer::Renderer(HWND hWnd)
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapChainDesc.Flags = 0;
 
+	UINT swapCreateFlags = 0u;
+
+#ifndef NDEBUG
+	swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif // !NDEBUG
+
 	const auto res = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
-		0,
+		swapCreateFlags,
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
@@ -38,6 +45,8 @@ RR::Renderer::Renderer(HWND hWnd)
 		nullptr,
 		&m_pContext
 	);
+
+	CHECK_WND_HR(res);
 }
 
 RR::Renderer::~Renderer()
@@ -60,5 +69,7 @@ RR::Renderer::~Renderer()
 
 void RR::Renderer::Update()
 {
-	m_pSwapChain->Present(1u, 0u);
+	const auto hRes = m_pSwapChain->Present(1u, 0u);
+
+	CHECK_WND_HR(hRes);
 }
