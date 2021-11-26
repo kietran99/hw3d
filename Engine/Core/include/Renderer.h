@@ -3,6 +3,7 @@
 #include "RR_Win.h"
 
 #include <d3d11.h>
+#include <wrl.h>
 
 namespace RR
 {
@@ -14,12 +15,15 @@ namespace RR
 		Renderer& operator=(const Renderer&) = delete;
 		Renderer(Renderer&&) = delete;
 		Renderer& operator=(Renderer&&) = delete;
-		~Renderer();
+		~Renderer() = default;
 
 		void Update();
+
+		void ClearColor(float r, float g, float b);
 	private:
-		IDXGISwapChain* m_pSwapChain;
-		ID3D11Device* m_pDevice;
-		ID3D11DeviceContext* m_pContext;
+		Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
+		Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pTarget;
 	};
 }

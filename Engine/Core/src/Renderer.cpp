@@ -3,6 +3,8 @@
 #include "Window.h"
 #include "Error.h"
 
+namespace wrl = Microsoft::WRL;
+
 RR::Renderer::Renderer(HWND hWnd)
 	: m_pSwapChain(nullptr)
 	, m_pDevice(nullptr)
@@ -31,7 +33,7 @@ RR::Renderer::Renderer(HWND hWnd)
 	swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif // !NDEBUG
 
-	const auto res = D3D11CreateDeviceAndSwapChain(
+	const auto createDevAndSwapChainRes = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -46,25 +48,16 @@ RR::Renderer::Renderer(HWND hWnd)
 		&m_pContext
 	);
 
-	CHECK_WND_HR(res);
-}
+	CHECK_WND_HR(createDevAndSwapChainRes);
 
-RR::Renderer::~Renderer()
-{
-	if (m_pContext != nullptr)
-	{
-		m_pContext->Release();
-	}
+	wrl::ComPtr<ID3D11Resource> pBackBuf;
+	const auto getBufRes = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuf);
 
-	if (m_pSwapChain != nullptr)
-	{
-		m_pSwapChain->Release();
-	}
+	CHECK_WND_HR(getBufRes);
+	
+	const auto createTargetViewRes = m_pDevice->CreateRenderTargetView(pBackBuf.Get(), nullptr, &m_pTarget);
 
-	if (m_pDevice != nullptr)
-	{
-		m_pDevice->Release();
-	}
+	CHECK_WND_HR(createTargetViewRes);
 }
 
 void RR::Renderer::Update()
@@ -72,4 +65,10 @@ void RR::Renderer::Update()
 	const auto hRes = m_pSwapChain->Present(1u, 0u);
 
 	CHECK_WND_HR(hRes);
+}
+
+void RR::Renderer::ClearColor(float r, float g, float b)
+{
+	const FLOAT color[] = { r, g, b, 1.0f };
+	m_pContext->ClearRenderTargetView(m_pTarget.Get(), color);
 }
