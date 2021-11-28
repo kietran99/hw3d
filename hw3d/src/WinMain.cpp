@@ -8,6 +8,6 @@ int WINAPI WinMain(
     PSTR cmdline,
     int cmdshow)
 {
-    Application app{};
+    Application app{ 800, 600, "My Window" };
     return (int)app.Start();
 }

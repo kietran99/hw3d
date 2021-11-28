@@ -9,7 +9,7 @@ namespace RR
 	class Application
 	{
 	public:
-		Application();
+		Application(int width, int height, const char* name);
 		~Application();
 
 		WPARAM Start();
