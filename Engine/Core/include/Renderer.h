@@ -20,6 +20,7 @@ namespace RR
 		void Update();
 
 		void ClearColor(float r, float g, float b);
+		void DrawTestTriangle();
 	private:
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
 		Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;

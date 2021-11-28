@@ -4,7 +4,7 @@
 #include "Debug.h"
 
 RR::Application::Application()
-	: m_pWindow(new Window(800, 450, "My Window"))
+	: m_pWindow(new Window(800, 600, "My Window"))
 {}
 
 RR::Application::~Application()
